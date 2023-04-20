@@ -1,0 +1,26 @@
+body {
+  background: #f9f9f9;
+}
+
+@font-face {
+  font-family: "MFMengYuan-Regular";
+  src: url("/fonts/MFMengYuan-Noncommercial-Regular.ttf"); /* IE9 */
+  src: local('☺'),
+    url("/fonts/MFMengYuan-Noncommercial-Regular.ttf") format("ttf2"),
+    url("/fonts/MFMengYuan-Noncommercial-Regular.ttf") format("ttf"),
+    url("/fonts/MFMengYuan-Noncommercial-Regular.ttf");
+}
+
+.rainfall {
+  background-color: transparent;
+  background-image: url("/raindrops-animate.svg");
+}
+
+.overflow-auto {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.overflow-auto::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
