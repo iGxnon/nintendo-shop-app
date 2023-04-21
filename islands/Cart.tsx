@@ -168,92 +168,92 @@ export function CartSimple({ cart }: { cart: CartData }) {
 
 export default function Cart() {
   const ref = useRef<HTMLDialogElement | null>(null);
-  // const { data, error } = useCart();
-  const data = {
-    id: "1145",
-    entries: [{
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }],
-    totalAmount: {
-      amount: 15.32,
-      currencyCode: "USD",
-    },
-  };
+  const { data, error } = useCart();
+  // const data = {
+  //   id: "1145",
+  //   entries: [{
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }, {
+  //     id: "12",
+  //     quantity: 2,
+  //     product: {
+  //       title: "Test",
+  //       featuredImage: null,
+  //     },
+  //     totalAmount: {
+  //       amount: 15.32,
+  //       currencyCode: "USD",
+  //     },
+  //   }],
+  //   totalAmount: {
+  //     amount: 15.32,
+  //     currencyCode: "USD",
+  //   },
+  // };
 
   const onDialogClick = (e: MouseEvent) => {
     if ((e.target as HTMLDialogElement).tagName === "DIALOG") {
@@ -261,9 +261,9 @@ export default function Cart() {
     }
   };
 
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>

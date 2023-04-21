@@ -1,4 +1,5 @@
-import { css, tw } from "twind/css";
+import { tw } from "twind";
+import { css } from "twind/css";
 import Input from "../components/Input.tsx";
 import { CartSimple } from "./Cart.tsx";
 import IconWechat from "../components/IconWechat.tsx";
@@ -7,6 +8,7 @@ import { StateUpdater, useState } from "preact/hooks";
 import OptionBox from "../components/OptionBox.tsx";
 import { Money } from "../utils/types.ts";
 import { formatCurrency } from "../utils/utils.ts";
+import { JSX } from "preact";
 
 enum Stage {
   Infomation,
