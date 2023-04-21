@@ -1,24 +1,17 @@
-import { IS_BROWSER } from "$fresh/src/runtime/utils.ts";
-import { AuthTokenKey, BACKEND_PREFIX } from "../data/consts.ts";
+import { AuthTokenKey, BACKEND_PREFIX_CLIENT } from "../data/consts.ts";
 
-// This query is executed both on server and client
 export async function graphql<T>(
   query: string,
   variables?: Record<string, unknown>,
 ): Promise<T> {
-  let headers: {
+  const headers: {
     "Content-Type": string;
-    "Authorization"?: string;
+    "Authorization": string;
   } = {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem(AuthTokenKey)}`,
   };
-  if (IS_BROWSER) {
-    headers = {
-      ...headers,
-      "Authorization": `Bearer ${localStorage.getItem(AuthTokenKey)}`,
-    };
-  }
-  const res = await fetch(`${BACKEND_PREFIX}/graphql`, {
+  const res = await fetch(`${BACKEND_PREFIX_CLIENT}/graphql`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({ query, variables }),

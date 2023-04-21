@@ -1,7 +1,7 @@
 import useSWR, { mutate } from "swr";
 import { CartData } from "../utils/types.ts";
 import { CartIdKey, CartQuery } from "./consts.ts";
-import { graphql } from "../utils/query.ts";
+import { graphql } from "../utils/query_client.ts";
 
 async function fetcher(): Promise<CartData> {
   const id = localStorage.getItem(CartIdKey);
@@ -32,7 +32,8 @@ export function useCart() {
   return useSWR<CartData, Error>("cart", fetcher, { keepPreviousData: true });
 }
 
-export async function addToCart(cartId: string, productId: string) {
+export async function addToCart(cartId: string, variantId: string) {
+  await new Promise(r => setTimeout(r, 1000));
   // todo
 }
 

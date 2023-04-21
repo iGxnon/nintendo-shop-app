@@ -1,6 +1,6 @@
 export const CartIdKey = "cartId";
 export const AuthTokenKey = "authToken";
-export const BACKEND_PREFIX = "http://127.0.0.1:3000";
+export const BACKEND_PREFIX_CLIENT = "http://127.0.0.1:3000";
 export const CartQuery = `{
   id
   entries {
