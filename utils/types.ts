@@ -38,7 +38,12 @@ export interface CartEntry {
   product: {
     title: string;
     featuredImage: Image | null;
+    variants: {
+      title: string;
+      orderIdx: number;
+    }[];
   };
+  variantAt: number;
   totalAmount: Money;
 }
 

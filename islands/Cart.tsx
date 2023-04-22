@@ -22,8 +22,8 @@ const backdrop = css({
   },
 });
 
-function CartItem(props: { cartId: string; cart: CartEntry }) {
-  const entry = props.cart;
+function CartItem(props: { cartId: string; cartEntry: CartEntry }) {
+  const entry = props.cartEntry;
   const remove = (e: Event) => {
     e.preventDefault();
     removeFromCart(props.cartId, entry.id);
@@ -38,12 +38,20 @@ function CartItem(props: { cartId: string; cart: CartEntry }) {
         />
       </div>
       <div class="ml-4 flex flex-1 flex-col">
-        <div class="flex justify-between text-base font-medium text-gray-900">
-          <h3>{entry.product.title}</h3>
-          <p class="ml-4">
-            {formatCurrency(entry.totalAmount)}
+        <div>
+          <div class="flex justify-between text-base font-medium text-gray-900">
+            <h3>{entry.product.title}</h3>
+            <p class="ml-4">
+              {formatCurrency(entry.totalAmount)}
+            </p>
+          </div>
+          <p class="mt-1 text-sm text-gray-500">
+            {entry.product.variants.find((v) => {
+              return v.orderIdx == entry.variantAt;
+            })?.title}
           </p>
         </div>
+
         <div class="flex flex-1 items-end justify-between text-sm">
           <p class="text-gray-500">
             Quantity <strong>{entry.quantity}</strong>
@@ -101,7 +109,7 @@ function CartInner(props: { cart: CartData | undefined }) {
           : (
             <ul role="list" class="-my-6 divide-y divide-gray-200">
               {props.cart.entries.map((entry) => (
-                <CartItem cartId={cartId} cart={entry} />
+                <CartItem cartId={cartId} cartEntry={entry} />
               ))}
             </ul>
           )}
@@ -156,7 +164,7 @@ export function CartSimple({ cart }: { cart: CartData }) {
             : (
               <ul role="list" class="-my-6 divide-y divide-gray-200">
                 {cart.entries.map((entry) => (
-                  <CartItem cartId={cart.id} cart={entry} />
+                  <CartItem cartId={cart.id} cartEntry={entry} />
                 ))}
               </ul>
             )}
@@ -169,7 +177,7 @@ export function CartSimple({ cart }: { cart: CartData }) {
 export default function Cart() {
   const ref = useRef<HTMLDialogElement | null>(null);
   const { data, error } = useCart();
-  
+
   const onDialogClick = (e: MouseEvent) => {
     if ((e.target as HTMLDialogElement).tagName === "DIALOG") {
       ref.current!.close();

@@ -33,10 +33,23 @@ export function useCart() {
 }
 
 export async function addToCart(cartId: string, variantId: string) {
-  await new Promise(r => setTimeout(r, 1000));
-  // todo
+  const mutation = graphql<{ cart: CartData }>(
+    `mutation add($cartId: ID!, $variantId: ID!) { addToCart(cartId: $cartId, variantId: $variantId) { cart ${CartQuery} } }`,
+    {
+      cartId,
+      variantId,
+    },
+  ).then(({ cart }) => cart);
+  await mutate("cart", mutation);
 }
 
-export async function removeFromCart(cartId: string, itemId: string) {
-  // todo
+export async function removeFromCart(cartId: string, entryId: string) {
+  const mutation = graphql<{ cart: CartData }>(
+    `mutation remove($cartId: ID!, $entryId: ID!) { removeCartEntryWithId(cartId: $cartId, entryId: $entryId) { cart ${CartQuery} } }`,
+    {
+      cartId,
+      entryId,
+    },
+  ).then(({ cart }) => cart);
+  await mutate("cart", mutation);
 }

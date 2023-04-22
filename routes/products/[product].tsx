@@ -28,7 +28,7 @@ export default function ProductPage() {
       </div>
       <ProductDetails
         product={{
-          id: "uuid",
+          id: "1",
           title: "一眼丁真",
           subTitle: "鉴定为",
           description: "纯纯的商品",
@@ -47,7 +47,7 @@ export default function ProductPage() {
             altText: "3",
           }],
           variants: [{
-            id: "114514",
+            id: "1",
             title: "xl",
             price: {
               amount: 10.2,
@@ -55,7 +55,7 @@ export default function ProductPage() {
             },
             availableForSale: true,
           }, {
-            id: "114515",
+            id: "3",
             title: "xxl",
             price: {
               amount: 12.2,

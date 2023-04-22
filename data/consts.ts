@@ -12,7 +12,12 @@ export const CartQuery = `{
         url
         altText
       }
+      variants {
+        title
+        orderIdx
+      }
     }
+    variantAt
     totalAmount {
       amount
       currencyCode
@@ -23,6 +28,7 @@ export const CartQuery = `{
     currencyCode
   }
 }`;
+
 export const ProductDetailQuery = `{
   id
   title
