@@ -45,7 +45,7 @@ export async function addToCart(cartId: string, variantId: string) {
 
 export async function removeFromCart(cartId: string, entryId: string) {
   const mutation = graphql<{ cart: CartData }>(
-    `mutation remove($cartId: ID!, $entryId: ID!) { removeCartEntryWithId(cartId: $cartId, entryId: $entryId) { cart ${CartQuery} } }`,
+    `mutation remove($cartId: ID!, $entryId: ID!) { removeFromCart(cartId: $cartId, entryId: $entryId) { cart ${CartQuery} } }`,
     {
       cartId,
       entryId,

@@ -22,7 +22,9 @@ const backdrop = css({
   },
 });
 
-function CartItem(props: { cartId: string; cartEntry: CartEntry }) {
+function CartItem(
+  props: { cartId: string; cartEntry: CartEntry; removeBtn?: boolean },
+) {
   const entry = props.cartEntry;
   const remove = (e: Event) => {
     e.preventDefault();
@@ -56,16 +58,17 @@ function CartItem(props: { cartId: string; cartEntry: CartEntry }) {
           <p class="text-gray-500">
             Quantity <strong>{entry.quantity}</strong>
           </p>
-
-          <div class="flex">
-            <button
-              type="button"
-              class="font-medium"
-              onClick={remove}
-            >
-              Remove
-            </button>
-          </div>
+          {props.removeBtn ? <div></div> : (
+            <div class="flex">
+              <button
+                type="button"
+                class="font-medium"
+                onClick={remove}
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </li>
@@ -164,7 +167,11 @@ export function CartSimple({ cart }: { cart: CartData }) {
             : (
               <ul role="list" class="-my-6 divide-y divide-gray-200">
                 {cart.entries.map((entry) => (
-                  <CartItem cartId={cart.id} cartEntry={entry} />
+                  <CartItem
+                    cartId={cart.id}
+                    cartEntry={entry}
+                    removeBtn={true}
+                  />
                 ))}
               </ul>
             )}

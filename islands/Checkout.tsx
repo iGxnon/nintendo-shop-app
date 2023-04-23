@@ -9,6 +9,7 @@ import OptionBox from "../components/OptionBox.tsx";
 import { Money } from "../utils/types.ts";
 import { formatCurrency } from "../utils/utils.ts";
 import { JSX } from "preact";
+import { useCart } from "../data/cart.ts";
 
 enum Stage {
   Infomation,
@@ -482,60 +483,13 @@ export default function Checkout() {
   const gridCols = css({
     "grid-template-columns": "57% 43%",
   });
-
-  const cart = {
-    id: "1145",
-    entries: [{
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }, {
-      id: "12",
-      quantity: 2,
-      product: {
-        title: "Test",
-        featuredImage: null,
-      },
-      totalAmount: {
-        amount: 15.32,
-        currencyCode: "USD",
-      },
-    }],
-    totalAmount: {
-      amount: 15.32,
-      currencyCode: "USD",
-    },
-  };
-
+  const { data, error } = useCart();
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+  if (!data) {
+    return <div>No data</div>;
+  }
   return (
     <div class={tw`grid ${gridCols}`}>
       <div class="flex flex-row justify-end px-20 pt-16">
@@ -545,11 +499,11 @@ export default function Checkout() {
       </div>
       <div class="flex flex-row justify-start px-10 py-16">
         <div class="flex flex-col w-[70%] gap-4">
-          <CartSimple cart={cart} />
+          <CartSimple cart={data} />
           <div class="overflow-auto bg-white rounded-md px-6 py-4">
             <div class="flex flex-row justify-between">
               <p>Subtotal</p>
-              <p>{formatCurrency(cart.totalAmount)}</p>
+              <p>{formatCurrency(data.totalAmount)}</p>
             </div>
             <div class="flex flex-row justify-between">
               <p>Shipping</p>

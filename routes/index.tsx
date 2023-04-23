@@ -6,6 +6,9 @@ import { tw } from "twind";
 import IconCart from "../components/IconCart.tsx";
 import { Product } from "../utils/types.ts";
 import { formatCurrency } from "../utils/utils.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { ProductDetailQuery } from "../data/consts.ts";
+import { graphql } from "../utils/query_server.ts";
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -41,146 +44,24 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-export default function Home() {
-  const products = [{
-    id: "uuid",
-    title: "一眼丁真",
-    subTitle: "鉴定为",
-    description: "纯纯的商品",
-    featuredImage: {
-      url: "",
-      altText: "1",
-    },
-    images: [{
-      url: "",
-      altText: "1",
-    }, {
-      url: "",
-      altText: "2",
-    }, {
-      url: "",
-      altText: "3",
-    }],
-    variants: [{
-      id: "114514",
-      title: "xl",
-      price: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }, {
-      id: "114515",
-      title: "xxl",
-      price: {
-        amount: 12.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }],
-    priceRange: {
-      minVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      maxVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-    },
-  }, {
-    id: "uuid",
-    title: "一眼丁真",
-    subTitle: "鉴定为",
-    description: "纯纯的商品",
-    featuredImage: {
-      url: "",
-      altText: "1",
-    },
-    images: [{
-      url: "",
-      altText: "1",
-    }, {
-      url: "",
-      altText: "2",
-    }, {
-      url: "",
-      altText: "3",
-    }],
-    variants: [{
-      id: "114514",
-      title: "xl",
-      price: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }, {
-      id: "114515",
-      title: "xxl",
-      price: {
-        amount: 12.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }],
-    priceRange: {
-      minVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      maxVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-    },
-  }, {
-    id: "uuid",
-    title: "一眼丁真",
-    subTitle: "鉴定为",
-    description: "纯纯的商品",
-    featuredImage: {
-      url: "",
-      altText: "1",
-    },
-    images: [{
-      url: "",
-      altText: "1",
-    }, {
-      url: "",
-      altText: "2",
-    }, {
-      url: "",
-      altText: "3",
-    }],
-    variants: [{
-      id: "114514",
-      title: "xl",
-      price: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }, {
-      id: "114515",
-      title: "xxl",
-      price: {
-        amount: 12.2,
-        currencyCode: "USD",
-      },
-      availableForSale: true,
-    }],
-    priceRange: {
-      minVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-      maxVariantPrice: {
-        amount: 10.2,
-        currencyCode: "USD",
-      },
-    },
-  }];
+interface Data {
+  products: {
+    nodes: Product[];
+  };
+}
+
+export const handler: Handlers<Data> = {
+  async GET(_req, ctx) {
+    const data = await graphql<Data>(
+      `query { products(first: 20) { nodes ${ProductDetailQuery} } }`,
+    );
+    return ctx.render(data);
+  },
+};
+
+export default function Home(ctx: PageProps<Data>) {
+  const { data } = ctx;
+  const products = data.products.nodes;
   return (
     <>
       <Head>

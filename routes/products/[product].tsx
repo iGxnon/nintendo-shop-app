@@ -1,8 +1,39 @@
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { Footer } from "../../components/Footer.tsx";
 import { Header } from "../../components/Header.tsx";
+import { ProductDetailQuery } from "../../data/consts.ts";
 import ProductDetails from "../../islands/ProductDetails.tsx";
+import { graphql } from "../../utils/query_server.ts";
+import { Product } from "../../utils/types.ts";
 
-export default function ProductPage() {
+export const handler: Handlers<{
+  product: Product | null;
+}> = {
+  async GET(_req, ctx) {
+    const data = await graphql<{
+      product: Product | null;
+    }>(
+      `query ($pid: ID!) { product(id: $pid) ${ProductDetailQuery} }`,
+      {
+        pid: ctx.params.product,
+      },
+    );
+    if (!data.product) {
+      return new Response("Product not found", { status: 404 });
+    }
+    return ctx.render(data);
+  },
+};
+
+export default function ProductPage(
+  ctx: PageProps<{
+    product: Product | null;
+  }>,
+) {
+  const { data } = ctx;
+  if (!data.product) {
+    return <div>Product not found</div>;
+  }
   return (
     <>
       <Header />
@@ -27,53 +58,7 @@ export default function ProductPage() {
         </a>
       </div>
       <ProductDetails
-        product={{
-          id: "1",
-          title: "一眼丁真",
-          subTitle: "鉴定为",
-          description: "纯纯的商品",
-          featuredImage: {
-            url: "",
-            altText: "1",
-          },
-          images: [{
-            url: "",
-            altText: "1",
-          }, {
-            url: "",
-            altText: "2",
-          }, {
-            url: "",
-            altText: "3",
-          }],
-          variants: [{
-            id: "1",
-            title: "xl",
-            price: {
-              amount: 10.2,
-              currencyCode: "USD",
-            },
-            availableForSale: true,
-          }, {
-            id: "3",
-            title: "xxl",
-            price: {
-              amount: 12.2,
-              currencyCode: "USD",
-            },
-            availableForSale: true,
-          }],
-          priceRange: {
-            minVariantPrice: {
-              amount: 10.2,
-              currencyCode: "USD",
-            },
-            maxVariantPrice: {
-              amount: 10.2,
-              currencyCode: "USD",
-            },
-          },
-        }}
+        product={data.product!}
       />
       <Footer />
     </>

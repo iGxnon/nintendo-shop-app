@@ -28,7 +28,6 @@ export const CartQuery = `{
     currencyCode
   }
 }`;
-
 export const ProductDetailQuery = `{
   id
   title

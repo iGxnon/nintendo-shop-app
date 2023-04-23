@@ -1,4 +1,4 @@
-const BACKEND_PREFIX_SERVER = "http://127.0.0.1:3000"
+const BACKEND_PREFIX_SERVER = "http://127.0.0.1:3000";
 
 export async function graphql<T>(
   query: string,
