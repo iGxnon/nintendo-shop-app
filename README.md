@@ -1,11 +1,5 @@
-# fresh project
+## Nintendo Shop
 
-### Usage
+> `deno fresh` + `rust graphql`
 
-Start the project:
-
-```
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
+![](./docs/pic-1.png)
