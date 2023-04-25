@@ -18,7 +18,7 @@ export function Footer() {
         </a>
         <a
           class="hover:underline flex gap-2 items-center"
-          href="https://github.com/denoland/merch"
+          href="https://github.com/iGxnon/nintendo-shop-app"
         >
           <BrandGithub />
           Source
