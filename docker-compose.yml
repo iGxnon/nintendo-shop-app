@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./deploy/all-in-one/Dockerfile
+    restart: always
+    container_name: nintendo-shop-backend
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./backend/config:/app/config
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    container_name: nintendo-shop-app
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./config:/app/config
+
+
+  database:
+    image: postgres:latest
+    container_name: database
+    restart: always
+    volumes:
+      - ./backend/migrations/00000000000000_diesel_initial_setup/up.sql:/docker-entrypoint-initdb.d/up-0.sql
+      - ./backend/migrations/2023-04-19-233159_shop/up.sql:/docker-entrypoint-initdb.d/up-1.sql
+      - ./pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shop
+      TZ: Asia/Shanghai

@@ -1,0 +1,1 @@
+export const BACKEND_PREFIX_SERVER = "http://backend:3000";

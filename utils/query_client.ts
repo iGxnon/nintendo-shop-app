@@ -1,4 +1,5 @@
-import {AuthTokenKey, BACKEND_PREFIX_CLIENT} from "../data/consts.ts";
+import {AuthTokenKey} from "../data/consts.ts";
+import {BACKEND_PREFIX_CLIENT} from "../config/client_config.ts";
 
 export async function graphql<T>(
     query: string,

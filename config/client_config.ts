@@ -1,0 +1,1 @@
+export const BACKEND_PREFIX_CLIENT = "http://127.0.0.1:3000";
